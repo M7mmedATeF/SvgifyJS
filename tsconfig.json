@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES2015", // Set to the desired version of JavaScript
+        "module": "ES6", // Set the module system (ES6 or CommonJS)
+        "declaration": true, // Generates .d.ts files
+        "outDir": "./dist", // Output directory for compiled files
+        "esModuleInterop": true, // Allows default import from commonjs modules
+        "skipLibCheck": true,
+        "moduleResolution": "node", // How modules are resolved (Node.js compatible)
+        "strict": true
+    },
+    "include": ["src/**/*"],
+    "exclude": ["node_modules", "**/*.test.ts"]
+}
