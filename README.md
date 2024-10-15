@@ -15,14 +15,14 @@
 
 ##
 
-![npm version](https://img.shields.io/npm/v/@sumcode/svgify.svg?label=version&style=flat-square)
-![npm downloads](https://img.shields.io/npm/dw/@sumcode/svgify.svg?color=red&style=flat-square)
-![bundle size](https://img.shields.io/bundlephobia/min/@sumcode/svgify.svg?color=gold&style=flat-square)
-![license](https://img.shields.io/npm/l/@sumcode/svgify.svg?color=orange&style=flat-square)
-![dependencies](https://img.shields.io/librariesio/release/npm/@sumcode/svgify?style=flat-square)
-![TypeScript](https://img.shields.io/npm/types/@sumcode/svgify.svg?style=flat-square)
-![issues](https://img.shields.io/github/issues/M7mmedATeF/svgify.svg?style=flat-square)
-![GitHub stars](https://img.shields.io/github/stars/M7mmedATeF/svgify.svg?style=social)
+![npm version](https://img.shields.io/npm/v/@sumcode/svgifyjs.svg?label=version&style=flat-square)
+![npm downloads](https://img.shields.io/npm/dw/@sumcode/svgifyjs.svg?color=red&style=flat-square)
+![bundle size](https://img.shields.io/bundlephobia/min/@sumcode/svgifyjs.svg?color=gold&style=flat-square)
+![license](https://img.shields.io/npm/l/@sumcode/svgifyjs.svg?color=orange&style=flat-square)
+![dependencies](https://img.shields.io/librariesio/release/npm/@sumcode/svgifyjs?style=flat-square)
+![TypeScript](https://img.shields.io/npm/types/@sumcode/svgifyjs.svg?style=flat-square)
+![issues](https://img.shields.io/github/issues/M7mmedATeF/svgifyjs.svg?style=flat-square)
+![GitHub stars](https://img.shields.io/github/stars/M7mmedATeF/svgifyjs.svg?style=social)
 
 The project is still in its beta version so some errors may occur or some icons may not accept the changes .. so please be helpful and report us for any problems you face.
 
@@ -30,7 +30,7 @@ The project is still in its beta version so some errors may occur or some icons 
 
 For Exhaustive 10K icon is being randomly generated from 70 icon [click here](https://svgify-exhaustive.netlify.app/)
 
-## 3. Basic Installation
+<!-- ## 3. Basic Installation
 
 Install the package via npm:
 
@@ -52,104 +52,105 @@ Initiate folder structure:
 ```
 .
 └── my-project
-    ├── node_modules
     ├── public
     │   └── assets
     │       └── icons (Add your svg icons here)
     │           └── YOUR_ICON_NAME.svg
     └── src
-        └── app.jsx (Add stylesheet here)
+        └── index.html
+``` -->
+
+## 3. Example
+
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SvgifyJS</title>
+        <link rel="stylesheet" href="./your_style.css" />
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@sumcode/svgifyjs@latest/dist/style.css" />
+    </head>
+    <body>
+        <i
+            class="svgify"
+            data-icon="i1"
+            data-scale="10"
+            data-font-weight="fill"></i>
+
+        <script src="https://cdn.jsdelivr.net/npm/@sumcode/svgifyjs@latest/dist/index.js"></script>
+        <script>
+            const svgifyInstance = new Svgify();
+        </script>
+    </body>
+</html>
 ```
 
-## 5. Example
+## 4. How To Use
 
-```js
-import "./App.css";
-import Svgify from "@sumcode/svgify";
-
-function App() {
-    return (
-        <>
-            <Svgify IconName="YOUR_ICON_NAME" Scale={1.2} FontWeight="stroke" />
-        </>
-    );
-}
-
-export default App;
+```html
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>SvgifyJS</title>
+        <link rel="stylesheet" href="./your_style.css" />
+        <!-- Import Style from CDN -->
+        <link
+            rel="stylesheet"
+            href="https://cdn.jsdelivr.net/npm/@sumcode/svgifyjs@latest/dist/style.css" />
+    </head>
+    <body>
+        <i
+            class="svgify"
+            data-icon="i1"
+            data-scale="10"
+            data-font-weight="fill"></i>
+        <!-- Import Library from CDN -->
+        <script src="https://cdn.jsdelivr.net/npm/@sumcode/svgifyjs@latest/dist/index.js"></script>
+        <script>
+            const svgifyInstance = new Svgify({
+                path: "assets/icons", // Specify the path to the svg icon (optional).
+                version: 1, // add different version to clear all old cached svg icons (default = 1).
+                FetchIcon: (Icon_Path) => {
+                    return fetch(Icon_Path, {
+                        method: "GET",
+                        headers: {
+                            "Content-Type": "application/json",
+                        },
+                    });
+                }, // customize fetching methods (optional).
+                loadingMSG: `<p>fetching svg<p>`, // Message or html element to be printed while waiting to fetch icon (optional).
+                errorMSG: `<p>Error fetching svg<p>`, // Message or html element to be printed if error occurs (optional).
+            });
+        </script>
+    </body>
+</html>
 ```
 
-## 6. For version controlling ( optional - recommended for icon changing with the same name )
+## 5. Class Settings
 
-```js
-import React from "react";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import { Svgifier } from "@sumcode/svgify";
+| Parameter    | Type                                        | Initial value          | Usage                                                             |
+| :----------- | :------------------------------------------ | :--------------------- | :---------------------------------------------------------------- |
+| `path`       | `string`?                                   | `""`                   | Specify the path to the svg icon                                  |
+| `version`    | `number`?                                   | `1`                    | Add different version to clear all old cached svg icons           |
+| `FetchIcon`  | `(Icon_path: string) => Promise<Response>`? | [Sec 4](#4-how-to-use) | Customize fetching methods                                        |
+| `loadingMSG` | `string \| html element`?                   | `""`                   | Message or html element to be printed while waiting to fetch icon |
+| `errorMSG`   | `string \| html element`?                   | `""`                   | Message or html element to be printed if error occurs             |
 
-createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        {/* Add Svgify Provider around your routes */}
-        <Svgifier version={1} clearForOldVersion>
-            <App />
-        </Svgifier>
-    </StrictMode>
-);
-```
+## 6. HTML Tag Attributes
 
-| Parameter            | Type                                                               | Initial value          | Usage                                                                                                                                         |
-| :------------------- | :----------------------------------------------------------------- | :--------------------- | :-------------------------------------------------------------------------------------------------------------------------------------------- |
-| `version`            | `Number`\*                                                         | `1`                    | Your current icon's version `should be different from the old one`                                                                            |
-| `clearForOldVersion` | `Boolean`?                                                         | `false`                | needs to be activated for upgrading from versions older than `2.0.0` <br/> _`(recommended to be disabled if starting with version >= 2.0.0)`_ |
-| `base_path`          | `string`?                                                          | `/assets/icons/`       | Path of icon's folder starting from public folder                                                                                             |
-| `FetchIcon`          | `(Icon_Path: string) => Promise<AxiosResponse<unknown, unknown>>`? | `axios.get(Icon_Path)` | Custom function to fetch the icon (Head to section 7.0 for example)                                                                           |
+| Parameter          | Type                                        | Initial value | Usage                                                            |
+| :----------------- | :------------------------------------------ | :------------ | :--------------------------------------------------------------- |
+| `data-icon`        | `string`?                                   | `""`          | The name of the icon in the mentioned path without its extension |
+| `data-scale`       | `number`?                                   | `1`           | The factor to be multiplied by the styled font-sizeicons         |
+| `data-font-weight` | `(Icon_path: string) => Promise<Response>`? | `fill`        | Specifies the type of the icon "stroke" , "fill" , "both"        |
 
-## 7. Custom fetching function
-
-```javascript
-    import React from "react";
-import { StrictMode } from "react";
-import { createRoot } from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
-import "@sumcode/svgify/styles";
-import { Svgifier } from "@sumcode/svgify";
-import axios from "axios";
-
-/*
- * for this example:
- *      icon_path = "/assets/iconization/YOUR_ICON_NAME"
- */
-const FetchIcon = async (icon_path: string) => {
-    return axios.get(`http://YOUR_SERVER_PUBLIC_URI.com/${icon_path}`);
-};
-
-createRoot(document.getElementById("root")!).render(
-    <StrictMode>
-        <Svgifier
-            base_path="/assets/iconization" // Changing public icon folder path
-            version={2}
-            FetchIcon={FetchIcon}
-            clearForOldVersion>
-            <App />
-        </Svgifier>
-    </StrictMode>
-);
-
-```
-
-## 7. Parameters
-
-| Parameter         | Type                     | Initial value | Usage                                                            |
-| :---------------- | :----------------------- | :------------ | :--------------------------------------------------------------- |
-| `IconName`        | `string`\*               | `""`          | The name of the icon in the mentioned path without its extension |
-| `FontWeight`      | `string`?                | `fill`        | Specifies the type of the icon `"stroke"` , `"fill"` , `"both"`  |
-| `Scale`           | `float`?                 | `1`           | The factor to be multiplied by the styled `font-size`            |
-| `className`       | `string`?                | `""`          | Custom ClassName to be passed to the `span` element              |
-| `LoadingElement`  | `"" \| React.ReactNode`? | `""`          | The text or element to be displayed while fetching the svg       |
-| `NotFoundElement` | `"" \| React.ReactNode`? | `""`          | The text or element to be displayed on fetch error               |
-
-## 8. Author
+## 7. Author
 
 <p style="margin-bottom: 5px">Mohammed Atef</p>
 

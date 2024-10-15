@@ -1,6 +1,6 @@
 {
     "name": "@sumcode/svgifyjs",
-    "version": "1.0.0",
+    "version": "0.0.1",
     "main": "dist/svgify.js",
     "types": "dist/Svgify.d.ts",
     "scripts": {
@@ -19,7 +19,7 @@
     ],
     "keywords": [],
     "author": "",
-    "license": "ISC",
+    "license": "MIT",
     "devDependencies": {
         "ts-loader": "^9.5.1",
         "typescript": "^5.6.3",
